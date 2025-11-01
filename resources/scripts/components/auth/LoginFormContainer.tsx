@@ -106,6 +106,7 @@ export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => 
             </FormBox>
             <p css={tw`text-center text-gray-400 text-sm mt-6`}>
                 &copy; <a href={'https://discord.gg/neodesigns'}>NeoDesigns,</a> built on{'Jexactyl'}
+                Photo by <a href="https://unsplash.com/@ayorkdesigns?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Alex York</a> on <a href="https://unsplash.com/photos/a-foggy-forest-filled-with-lots-of-trees-XmThzq_LeK0?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
             </p>
         </Wrapper>
     </Container>
