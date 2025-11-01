@@ -62,7 +62,7 @@ type Props = React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, 
 
 const Container = styled.div`
     ${tw`min-h-screen flex items-center justify-center`}
-    background-image: url('/path/to/your/background-image.jpg');
+    background-image: url('/var/www/jexactyl/public/alex-york-XmThzq_LeK0-unsplash.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
