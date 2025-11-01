@@ -138,8 +138,7 @@
 
 // export default LoginContainer;
 
-
-import tw from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 import Reaptcha from 'reaptcha';
 import login from '@/api/auth/login';
 import { object, string } from 'yup';
@@ -152,6 +151,24 @@ import { Button } from '@/components/elements/button/index';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import LoginFormContainer from '@/components/auth/LoginFormContainer';
 
+// 🖤 Dark Input + Wrapper Styles
+const DarkInput = styled(Field)`
+    ${tw`bg-gray-900 border-0 text-white placeholder-gray-500 w-full py-3 rounded pl-10`}
+    
+    &:focus {
+        ${tw`ring-2 ring-gray-700`}
+    }
+`;
+
+const InputWrapper = styled.div`
+    ${tw`relative`}
+    
+    span, svg {
+        ${tw`absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500`}
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+`;
 
 interface Values {
     username: string;
@@ -175,35 +192,28 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
     const onSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
         clearFlashes();
 
-        // If there is no token in the state yet, request the token and then abort this submit request
-        // since it will be re-submitted when the recaptcha data is returned by the component.
         if (recaptchaEnabled && !token) {
             ref.current!.execute().catch((error) => {
                 console.error(error);
-
                 setSubmitting(false);
                 clearAndAddHttpError({ error });
             });
-
             return;
         }
 
         login({ ...values, recaptchaData: token })
             .then((response) => {
                 if (response.complete) {
-                    // @ts-expect-error this is valid
+                    // @ts-expect-error valid
                     window.location = response.intended || '/';
                     return;
                 }
-
                 history.replace('/auth/login/checkpoint', { token: response.confirmationToken });
             })
             .catch((error) => {
                 console.error(error);
-
                 setToken('');
                 if (ref.current) ref.current.reset();
-
                 setSubmitting(false);
                 clearAndAddHttpError({ error });
             });
@@ -218,58 +228,54 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                 password: string().required('Please enter your account password.'),
             })}
         >
-            {({ isSubmitting, setSubmitting, submitForm }) => (
-                <LoginFormContainer title={'Welcome to ' + name} css={tw`w-full flex flex-col`}>
+            {({ isSubmitting }) => (
+                <LoginFormContainer title={`Welcome to ${name}`} css={tw`w-full flex flex-col`}>
+                    
+                    {/* Username */}
                     <div css={tw`mb-4`}>
                         <label css={tw`block text-gray-300 text-sm mb-2`}>Username or Email</label>
-                        <div css={tw`relative`}>
-                            <span css={tw`absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500`}>
-                                @
-                            </span>
-                            <Field 
-                                light 
-                                type={'text'} 
-                                name={'username'} 
+                        <InputWrapper>
+                            <span>@</span>
+                            <DarkInput 
+                                type='text'
+                                name='username'
                                 disabled={isSubmitting}
-                                css={tw`w-full bg-gray-900 border-0 text-white pl-10 py-3 rounded`}
+                                placeholder='Enter your username or email'
                             />
-                        </div>
+                        </InputWrapper>
                     </div>
-                    
+
+                    {/* Password */}
                     <div css={tw`mb-6`}>
                         <div css={tw`flex justify-between items-center mb-2`}>
                             <label css={tw`text-gray-300 text-sm`}>Password</label>
                             <Link
-                                to={'/auth/password'}
+                                to='/auth/password'
                                 css={tw`text-xs text-green-500 hover:text-green-400`}
                             >
                                 Forgot Password?
                             </Link>
                         </div>
-                        <div css={tw`relative`}>
-                            <span css={tw`absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500`}>
-                                🔒
-                            </span>
-                            <Field 
-                                light 
-                                type={'password'} 
-                                name={'password'} 
+                        <InputWrapper>
+                            <span>🔒</span>
+                            <DarkInput 
+                                type='password'
+                                name='password'
                                 disabled={isSubmitting}
-                                css={tw`w-full bg-gray-900 border-0 text-white pl-10 py-3 rounded`}
+                                placeholder='Enter your password'
                             />
-                        </div>
+                        </InputWrapper>
                     </div>
-                    
+
+                    {/* Submit button */}
                     <Button 
-                        type={'submit'} 
-                        size={Button.Sizes.Large} 
+                        type='submit'
+                        size={Button.Sizes.Large}
                         css={tw`w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded font-medium`}
                         disabled={isSubmitting}
                     >
                         Login
                     </Button>
-                    
-                    {/* Rest of your code */}
                 </LoginFormContainer>
             )}
         </Formik>
