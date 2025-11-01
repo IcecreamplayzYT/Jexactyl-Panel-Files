@@ -152,6 +152,25 @@ import { Button } from '@/components/elements/button/index';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import LoginFormContainer from '@/components/auth/LoginFormContainer';
 
+const DarkInput = styled(Input)`
+    ${tw`bg-gray-900 border-0 text-white placeholder-gray-500`}
+    padding-left: 2.5rem;
+    
+    &:focus {
+        ${tw`ring-2 ring-gray-700`}
+    }
+`;
+
+const InputWrapper = styled.div`
+    ${tw`relative`}
+    
+    svg {
+        ${tw`absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500`}
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+`;
+
 interface Values {
     username: string;
     password: string;
