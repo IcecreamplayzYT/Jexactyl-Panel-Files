@@ -1,3 +1,0 @@
-yarn run v1.22.22
-$ yarn run clean && cross-env NODE_ENV=production ./node_modules/.bin/webpack --mode production
-$ cd public/assets && find . \( -name "*.js" -o -name "*.map" \) -type f -delete
