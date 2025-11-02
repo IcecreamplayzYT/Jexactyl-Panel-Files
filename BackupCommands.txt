@@ -1,0 +1,11 @@
+# View backup logs
+sudo journalctl -u jexactyl-backup.service
+
+# Stop the timer
+sudo systemctl stop jexactyl-backup.timer
+
+# Restart the timer
+sudo systemctl restart jexactyl-backup.timer
+
+# Disable the timer
+sudo systemctl disable jexactyl-backup.timer
