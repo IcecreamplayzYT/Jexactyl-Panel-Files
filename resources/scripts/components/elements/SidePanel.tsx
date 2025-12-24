@@ -116,7 +116,6 @@ import * as Icon from 'react-feather';
 import { useStoreState } from 'easy-peasy';
 import styled from 'styled-components/macro';
 import { NavLink, Link } from 'react-router-dom';
-import ProgressBar from '@/components/elements/ProgressBar';
 import Tooltip from '@/components/elements/tooltip/Tooltip';
 import SearchContainer from '@/components/dashboard/search/SearchContainer';
 
@@ -249,7 +248,7 @@ export default () => {
     return (
         <PanelDiv>
             <LogoBox to={'/'}>
-                <img src={logo ?? 'https://avatars.githubusercontent.com/u/91636558'} alt='Logo' />
+                <img src={logo ?? 'https://cdn.vervecustoms.com/logo/Neo-002-Transparent-Sized.png'} alt='Logo' />
             </LogoBox>
 
             <NavContainer>

@@ -36,6 +36,18 @@ class StripeController extends ClientApiController
             'mode' => 'payment',
             'customer_email' => $request->user()->email,
             'metadata' => ['credit_amount' => $amount, 'user_id' => $request->user()->id],
+            'custom_fields' => [
+                [
+                  'key' => 'discord_username',
+                  'label' => ['type' => 'custom', 'custom' => 'Discord Username'],
+                  'type' => 'text',
+                ],
+                [
+                  'key' => 'discord_id',
+                  'label' => ['type' => 'custom', 'custom' => 'Discord ID'],
+                  'type' => 'text',
+                ],
+             ],
             'line_items' => [
                 [
                     'quantity' => 1,

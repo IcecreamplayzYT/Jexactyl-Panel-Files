@@ -289,7 +289,6 @@ import createServer from '@/api/store/createServer';
 import Spinner from '@/components/elements/Spinner';
 import { getNodes, Node } from '@/api/store/getNodes';
 import { getNests, Nest } from '@/api/store/getNests';
-import { Button } from '@/components/elements/button';
 import InputSpinner from '@/components/elements/InputSpinner';
 import StoreError from '@/components/elements/store/StoreError';
 import React, { ChangeEvent, useEffect, useState } from 'react';
@@ -362,54 +361,6 @@ export default () => {
                 setLoading(false);
                 clearAndAddHttpError({ key: 'store:create', error });
             });
-    };
-
-    const validateStep = (values: CreateValues, stepNum: number) => {
-        const errors: any = {};
-
-        if (stepNum === 1) {
-            if (!values.name || values.name.trim().length < 3) {
-                errors.name = 'Server name is required and must be at least 3 characters';
-            }
-        }
-
-        if (stepNum === 2) {
-            if (!values.cpu || values.cpu < 50 || values.cpu > 100) {
-                errors.cpu = 'CPU must be between 50% and 100%';
-            }
-            if (!values.memory || values.memory < 256 || values.memory > 512) {
-                errors.memory = 'RAM must be between 256 MB and 512 MB';
-            }
-            if (!values.disk || values.disk < 256 || values.disk > 700) {
-                errors.disk = 'Storage must be between 256 MB and 700 MB';
-            }
-        }
-
-        if (stepNum === 3) {
-            if (!values.ports || values.ports < 1) {
-                errors.ports = 'Server allocations must be at least 1';
-            }
-            if (values.backups !== null && values.backups !== undefined && (values.backups < 1 || values.backups > 5)) {
-                errors.backups = 'Server backups must be between 1 and 5';
-            }
-            if (values.databases !== null && values.databases !== undefined && values.databases > 1) {
-                errors.databases = 'Server databases maximum is 1';
-            }
-        }
-
-        if (stepNum === 4) {
-            if (!node || node === 0) {
-                errors.node = 'You must select a node';
-            }
-            if (!nest || nest === 0) {
-                errors.nest = 'You must select a nest';
-            }
-            if (!egg || egg === 0) {
-                errors.egg = 'You must select an egg';
-            }
-        }
-
-        return errors;
     };
 
     const getStepErrors = (errors: any, stepNum: number) => {

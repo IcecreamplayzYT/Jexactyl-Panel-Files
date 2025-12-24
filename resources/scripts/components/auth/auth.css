@@ -1,0 +1,27 @@
+
+/* Fix scrollbar issue on auth pages */
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Ensure full height without scroll */
+#root {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Fix any potential margin/padding issues */
+* {
+    box-sizing: border-box;
+}
+
+/* Remove default body margin that causes scrollbar */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+
+}
