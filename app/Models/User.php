@@ -129,6 +129,7 @@ class User extends Model implements
         'username',
         'email',
         'discord_id',
+        'google_id',
         'name_first',
         'name_last',
         'password',

@@ -2,6 +2,7 @@
 
 use Jexactyl\Http\Controllers\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\GoogleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,17 @@ Route::get('/password/reset/{token}', [Auth\LoginController::class, 'index'])->n
 
 Route::post('/discord/login', [Auth\DiscordController::class, 'index'])->name('auth.discord.login');
 Route::get('/discord/callback', [Auth\DiscordController::class, 'callback'])->name('auth.discord.callback');
+
+
+/*
+|--------------------------------------------------------------------------
+| Google OAuth Routes
+|--------------------------------------------------------------------------
+| 2026 Routes for Google OAuth 
+*/
+
+Route::get('/google', [Auth\GoogleController::class, 'index'])->name('auth.google.login');
+Route::get('/google/callback', [Auth\GoogleController::class, 'callback'])->name('auth.google.callback');
 
 // Apply a throttle to authentication action endpoints, in addition to the
 // recaptcha endpoints to slow down manual attack spammers even more. 🤷

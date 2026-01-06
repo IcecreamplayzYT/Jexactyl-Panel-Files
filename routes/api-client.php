@@ -7,6 +7,9 @@ use Jexactyl\Http\Middleware\Activity\AccountSubject;
 use Jexactyl\Http\Middleware\RequireTwoFactorAuthentication;
 use Jexactyl\Http\Middleware\Api\Client\Server\ResourceBelongsToServer;
 use Jexactyl\Http\Middleware\Api\Client\Server\AuthenticateServerAccess;
+use Jexactyl\Http\Controllers\Api\Client\Store\RobloxController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -104,10 +107,18 @@ Route::group([
         Route::post('/', [Client\Store\ResourceController::class, 'earn'])->name('api:client:store.earn');
     });
 
+    Route::group(['prefix' => '/robux'], function () {
+        Route::post('/initiate', [Client\Store\RobloxController::class, 'initiate']);
+        Route::post('/check', [Client\Store\RobloxController::class, 'check']);
+        Route::get('/products', [Client\Store\RobloxController::class, 'products']);
+    });
+
     Route::group(['prefix' => '/paypal'], function () {
         Route::get('/callback', [Client\Store\PayPalController::class, 'callback'])->name('api:client:store.paypal.callback');
         Route::post('/', [Client\Store\PayPalController::class, 'purchase'])->name('api:client:store.paypal');
     });
+
+    Route::post('/webhook', [Client\Store\RobloxController::class, 'handleWebhook'])->withoutMiddleware(['auth:sanctum']);
 });
 
 /*
@@ -225,4 +236,7 @@ Route::group([
         Route::post('/reinstall', [Client\Servers\SettingsController::class, 'reinstall']);
         Route::put('/docker-image', [Client\Servers\SettingsController::class, 'dockerImage']);
     });
+
+    // Robux payment routes - products endpoint is public
+
 });
