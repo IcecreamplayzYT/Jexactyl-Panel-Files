@@ -29,16 +29,10 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-
-    'roblox' => [
-        'universe_id' => env('ROBLOX_UNIVERSE_ID'),
-        'api_key' => env('ROBLOX_API_KEY'),
-        'enabled' => env('ROBLOX_ENABLED', false),
-    ],
     
     'google' => [
     'client_id' => env('GOOGLE_CLIENT_ID'),
     'client_secret' => env('GOOGLE_CLIENT_SECRET'),
     'redirect' => env('GOOGLE_REDIRECT_URI'),
-],
+    ],
 ];

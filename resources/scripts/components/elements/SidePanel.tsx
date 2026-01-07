@@ -248,7 +248,7 @@ export default () => {
     return (
         <PanelDiv>
             <LogoBox to={'/'}>
-                <img src={logo ?? 'https://cdn.vervecustoms.com/logo/Neo-002-Transparent-Sized.png'} alt='Logo' />
+                <img src="https://cdn.vervecustoms.com/logo/neo.png" alt="Logo" />
             </LogoBox>
 
             <NavContainer>

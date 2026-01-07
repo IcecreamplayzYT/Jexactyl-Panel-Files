@@ -4,10 +4,6 @@ use Jexactyl\Http\Controllers\Base;
 use Illuminate\Support\Facades\Route;
 use Jexactyl\Http\Middleware\RequireTwoFactorAuthentication;
 
-// Roblox webhook - public endpoint
-Route::post('/api/client/store/webhook', [RobloxController::class, 'handleWebhook'])
-    ->withoutMiddleware(['auth.session', \Jexactyl\Http\Middleware\RequireTwoFactorAuthentication::class]);
-
 Route::get('/', [Base\IndexController::class, 'index'])->name('index')->fallback();
 Route::get('/account', [Base\IndexController::class, 'index'])
     ->withoutMiddleware(RequireTwoFactorAuthentication::class)

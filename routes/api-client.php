@@ -7,16 +7,7 @@ use Jexactyl\Http\Middleware\Activity\AccountSubject;
 use Jexactyl\Http\Middleware\RequireTwoFactorAuthentication;
 use Jexactyl\Http\Middleware\Api\Client\Server\ResourceBelongsToServer;
 use Jexactyl\Http\Middleware\Api\Client\Server\AuthenticateServerAccess;
-use Jexactyl\Http\Controllers\Api\Client\Store\RobloxController;
 
-/*
-|--------------------------------------------------------------------------
-| Roblox Webhook - NO AUTHENTICATION
-|--------------------------------------------------------------------------
-| This route must be defined FIRST before any middleware is applied
-*/
-Route::post('/store/webhook', [RobloxController::class, 'handleWebhook'])
-    ->name('api:client:store.webhook');
 
 /*
 |--------------------------------------------------------------------------
@@ -114,19 +105,21 @@ Route::group([
         Route::post('/', [Client\Store\ResourceController::class, 'earn'])->name('api:client:store.earn');
     });
 
-    Route::group(['prefix' => '/robux'], function () {
-        Route::post('/initiate', [Client\Store\RobloxController::class, 'initiate']);
-        Route::post('/check', [Client\Store\RobloxController::class, 'check']);
-        Route::get('/products', [Client\Store\RobloxController::class, 'products']);
-    });
-
     Route::group(['prefix' => '/paypal'], function () {
         Route::get('/callback', [Client\Store\PayPalController::class, 'callback'])->name('api:client:store.paypal.callback');
         Route::post('/', [Client\Store\PayPalController::class, 'purchase'])->name('api:client:store.paypal');
     });
+    Route::group(['prefix' => '/robux'], function () {
+    Route::post('/profile', 'Api\Client\Store\RobuxController@getUserProfile');
+    Route::get('/products', 'Api\Client\Store\RobuxController@getProducts');
+    Route::post('/purchase', 'Api\Client\Store\RobuxController@initiatePurchase');
+    Route::post('/check', 'Api\Client\Store\RobuxController@checkPurchase');
+    Route::post('/cancel', 'Api\Client\Store\RobuxController@cancelPurchase');
+    });
 
-    // Webhook route moved to top of file - see line 18
 });
+
+
 
 /*
 |--------------------------------------------------------------------------

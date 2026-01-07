@@ -64,10 +64,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('/api/remote')
                 ->scopeBindings()
                 ->group(base_path('routes/api-remote.php'));
-          
-                // Roblox webhook route - NO middleware at all
-            Route::prefix('/api/client')
-                ->group(base_path('routes/webhook.php'));
+
         });
     }
 
