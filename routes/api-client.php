@@ -9,7 +9,14 @@ use Jexactyl\Http\Middleware\Api\Client\Server\ResourceBelongsToServer;
 use Jexactyl\Http\Middleware\Api\Client\Server\AuthenticateServerAccess;
 use Jexactyl\Http\Controllers\Api\Client\Store\RobloxController;
 
-
+/*
+|--------------------------------------------------------------------------
+| Roblox Webhook - NO AUTHENTICATION
+|--------------------------------------------------------------------------
+| This route must be defined FIRST before any middleware is applied
+*/
+Route::post('/store/webhook', [RobloxController::class, 'handleWebhook'])
+    ->name('api:client:store.webhook');
 
 /*
 |--------------------------------------------------------------------------
@@ -118,7 +125,7 @@ Route::group([
         Route::post('/', [Client\Store\PayPalController::class, 'purchase'])->name('api:client:store.paypal');
     });
 
-    Route::post('/webhook', [Client\Store\RobloxController::class, 'handleWebhook'])->withoutMiddleware(['auth:sanctum']);
+    // Webhook route moved to top of file - see line 18
 });
 
 /*
@@ -236,7 +243,4 @@ Route::group([
         Route::post('/reinstall', [Client\Servers\SettingsController::class, 'reinstall']);
         Route::put('/docker-image', [Client\Servers\SettingsController::class, 'dockerImage']);
     });
-
-    // Robux payment routes - products endpoint is public
-
 });

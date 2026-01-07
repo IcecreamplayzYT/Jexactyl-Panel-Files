@@ -35,6 +35,8 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('database', Database::class);
 
         $this->routes(function () {
+
+
             Route::middleware('web')->group(function () {
                 Route::middleware(['auth.session', RequireTwoFactorAuthentication::class])
                     ->group(base_path('routes/base.php'));
@@ -62,6 +64,10 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('/api/remote')
                 ->scopeBindings()
                 ->group(base_path('routes/api-remote.php'));
+          
+                // Roblox webhook route - NO middleware at all
+            Route::prefix('/api/client')
+                ->group(base_path('routes/webhook.php'));
         });
     }
 

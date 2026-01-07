@@ -62,6 +62,12 @@ return [
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 
+        'roblox' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/larvel.log'),
+            'level' => 'debug',
+        ],
+
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
