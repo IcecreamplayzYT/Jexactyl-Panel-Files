@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api\Client\Store;
+namespace Jexactyl\Http\Controllers\Api\Client\Store;
 
-use App\Models\User;
+use Jexactyl\Models\User;
 use Illuminate\Http\Request;
-use App\Models\RobuxPurchase;
+use Jexactyl\Models\RobuxPurchase;
 use Illuminate\Support\Facades\Http;
-use App\Http\Controllers\Controller;
+use Jexactyl\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class RobuxController extends Controller

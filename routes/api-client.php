@@ -110,11 +110,11 @@ Route::group([
         Route::post('/', [Client\Store\PayPalController::class, 'purchase'])->name('api:client:store.paypal');
     });
     Route::group(['prefix' => '/robux'], function () {
-    Route::post('/profile', 'Api\Client\Store\RobuxController@getUserProfile');
-    Route::get('/products', 'Api\Client\Store\RobuxController@getProducts');
-    Route::post('/purchase', 'Api\Client\Store\RobuxController@initiatePurchase');
-    Route::post('/check', 'Api\Client\Store\RobuxController@checkPurchase');
-    Route::post('/cancel', 'Api\Client\Store\RobuxController@cancelPurchase');
+        Route::post('/profile', [Client\Store\RobuxController::class, 'getUserProfile']);
+        Route::get('/products', [Client\Store\RobuxController::class, 'getProducts']);
+        Route::post('/purchase', [Client\Store\RobuxController::class, 'initiatePurchase']);
+        Route::post('/check', [Client\Store\RobuxController::class, 'checkPurchase']);
+        Route::post('/cancel', [Client\Store\RobuxController::class, 'cancelPurchase']);
     });
 
 });

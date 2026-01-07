@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Jexactyl\Console\Commands;
 
-use App\Models\User;
+use Jexactyl\Models\User;
 use Illuminate\Console\Command;
-use App\Models\RobuxPurchase;
+use Jexactyl\Models\RobuxPurchase;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 

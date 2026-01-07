@@ -36,7 +36,7 @@ Route::group(['prefix' => '/users'], function () {
 Route::group(['prefix' => '/approvals'], function () {
     Route::get('/', [Application\ApprovalsController::class, 'view'])->name('api.application.approvals.view');
 
-    Route::post('/deny/{id}', [Applciation\ApprovalsController::class, 'deny']);
+    Route::post('/deny/{id}', [Application\ApprovalsController::class, 'deny']);
     Route::post('/approve/{id}', [Application\ApprovalsController::class, 'approve']);
 });
 

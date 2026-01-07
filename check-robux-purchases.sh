@@ -1,9 +1,4 @@
 #!/bin/bash
-
-# Robux Purchase Checker Script
-# This script runs every 5 seconds to check pending Robux purchases
-# Place this in /var/www/jexactyl/check-robux-purchases.sh
-
 ARTISAN_PATH="/var/www/jexactyl"
 LOG_FILE="/var/www/jexactyl/storage/logs/robux-checker.log"
 
