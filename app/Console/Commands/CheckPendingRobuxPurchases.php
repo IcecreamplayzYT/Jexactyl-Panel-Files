@@ -16,8 +16,7 @@ class CheckPendingRobuxPurchases extends Command
     public function handle()
     {
         $pendingPurchases = RobuxPurchase::where('status', 'pending')
-            ->where('created_at', '>=', now()->subHours(24)) // Only check purchases from last 24 hours
-            ->where('check_attempts', '<', 720) // Max 720 attempts (1 hour at 5 second intervals)
+            ->where('created_at', '>=', now()->subMinutes(15)) // Check purchases from last 15 minutes
             ->get();
 
         if ($pendingPurchases->isEmpty()) {
@@ -60,10 +59,10 @@ class CheckPendingRobuxPurchases extends Command
                 $purchase->incrementCheckAttempts();
                 $this->info("  Purchase #{$purchase->id} not yet completed (attempt #{$purchase->check_attempts})");
 
-                // Auto-fail after 1 hour (720 attempts at 5 seconds each)
-                if ($purchase->check_attempts >= 720) {
-                    $purchase->markFailed('Purchase verification timed out after 1 hour');
-                    $this->warn("  Purchase #{$purchase->id} timed out after 1 hour");
+                // Auto-fail after 15 minutes (180 attempts at 5 seconds each)
+                if ($purchase->check_attempts >= 180) {
+                    $purchase->markFailed('Purchase verification timed out after 15 minutes');
+                    $this->warn("  Purchase #{$purchase->id} timed out after 15 minutes");
                 }
             }
         } catch (\Exception $e) {

@@ -29,6 +29,7 @@ export default () => {
     const [purchaseId, setPurchaseId] = useState<number | null>(null);
     const [loading, setLoading] = useState(false);
     const [checking, setChecking] = useState(false);
+    const [timeRemaining, setTimeRemaining] = useState(900); // 15 minutes in seconds
 
     useEffect(() => {
         // Load products on mount
@@ -101,7 +102,8 @@ export default () => {
                     type: 'success',
                     message: `${response.message} You received ${response.credits_added} credits!`,
                 });
-                resetForm();
+                // Reload page to show updated balance
+                setTimeout(() => window.location.reload(), 2000);
             } else {
                 clearAndAddHttpError({ key: 'store:robux', error: response.message });
             }
@@ -110,6 +112,62 @@ export default () => {
         } finally {
             setChecking(false);
         }
+    };
+
+    // Auto-check payment every 10 seconds when in pending state
+    useEffect(() => {
+        if (step !== 'pending' || !purchaseId) return;
+
+        // Reset timer when entering pending state
+        setTimeRemaining(900);
+
+        const interval = setInterval(async () => {
+            try {
+                const response = await checkRobloxPayment(purchaseId);
+                if (response.success) {
+                    clearInterval(interval);
+                    addFlash({
+                        key: 'store:robux',
+                        type: 'success',
+                        message: `${response.message} You received ${response.credits_added} credits!`,
+                    });
+                    setTimeout(() => window.location.reload(), 2000);
+                }
+            } catch (error) {
+                // Silently continue checking
+            }
+        }, 10000); // Check every 10 seconds
+
+        return () => clearInterval(interval);
+    }, [step, purchaseId]);
+
+    // Countdown timer
+    useEffect(() => {
+        if (step !== 'pending') return;
+
+        const timer = setInterval(() => {
+            setTimeRemaining((prev) => {
+                if (prev <= 1) {
+                    clearInterval(timer);
+                    addFlash({
+                        key: 'store:robux',
+                        type: 'danger',
+                        message: 'Purchase verification timed out. Please contact support if you completed the purchase.',
+                    });
+                    resetForm();
+                    return 0;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [step]);
+
+    const formatTime = (seconds: number) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
     };
 
     const cancelPurchase = async () => {
@@ -241,12 +299,22 @@ export default () => {
                 <FlashMessageRender byKey={'store:robux'} css={tw`mb-4`} />
 
                 <div css={tw`bg-blue-500 bg-opacity-10 border border-blue-500 rounded-lg p-4 mb-4`}>
-                    <h3 css={tw`text-blue-400 font-bold mb-2`}>⏳ Purchase Pending</h3>
+                    <div css={tw`flex justify-between items-start mb-2`}>
+                        <h3 css={tw`text-blue-400 font-bold`}>Purchase Pending</h3>
+                        <div css={tw`text-right`}>
+                            <div css={tw`text-blue-400 font-mono text-lg`}>{formatTime(timeRemaining)}</div>
+                            <div css={tw`text-xs text-blue-300`}>Time remaining</div>
+                        </div>
+                    </div>
                     <p css={tw`text-sm text-gray-300 mb-2`}>
                         Purchasing <span css={tw`font-bold text-white`}>{selectedProduct.credits} credits</span> for{' '}
                         <span css={tw`font-bold text-white`}>{selectedProduct.price} Robux</span>
                     </p>
                     <p css={tw`text-xs text-gray-400`}>Account: {profile.username}</p>
+                    <div css={tw`mt-3 flex items-center gap-2 text-xs text-green-400`}>
+                        <div css={tw`animate-pulse`}>●</div>
+                        <span>Auto-checking every 10 seconds...</span>
+                    </div>
                 </div>
 
                 <div css={tw`bg-neutral-700 rounded-lg p-4 mb-4`}>
@@ -258,13 +326,19 @@ export default () => {
                         </li>
                         <li css={tw`flex items-start gap-2`}>
                             <span css={tw`text-blue-400 font-bold`}>2.</span>
-                            <span>Purchase the gamepass on Roblox</span>
+                            <span>Purchase the gamepass on Roblox (take your time!)</span>
                         </li>
                         <li css={tw`flex items-start gap-2`}>
                             <span css={tw`text-blue-400 font-bold`}>3.</span>
-                            <span>Return here and click "Check Payment"</span>
+                            <span>Your credits will be added automatically</span>
                         </li>
                     </ol>
+
+                    <div css={tw`mt-4 p-3 bg-green-500 bg-opacity-10 border border-green-500 rounded`}>
+                        <p css={tw`text-xs text-green-300`}>
+                            ✓ You can switch tabs or apps - we'll keep checking for up to 15 minutes!
+                        </p>
+                    </div>
 
                     <div css={tw`mt-3 p-3 bg-yellow-500 bg-opacity-10 border border-yellow-500 rounded`}>
                         <p css={tw`text-xs text-yellow-300`}>
@@ -284,10 +358,10 @@ export default () => {
                 </a>
 
                 <div css={tw`flex gap-2`}>
-                    <Button onClick={checkPayment} disabled={checking} css={tw`flex-1`}>
-                        {checking ? 'Checking...' : 'Check Payment Status'}
+                    <Button onClick={checkPayment} disabled={checking} css={tw`flex-1 bg-gray-600 hover:bg-gray-700`}>
+                        {checking ? 'Checking...' : 'Check Now (Optional)'}
                     </Button>
-                    <Button onClick={cancelPurchase} css={tw`bg-gray-600 hover:bg-gray-700`}>
+                    <Button onClick={cancelPurchase} css={tw`bg-red-600 hover:bg-red-700`}>
                         Cancel
                     </Button>
                 </div>
