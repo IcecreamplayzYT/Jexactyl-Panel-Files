@@ -6,11 +6,11 @@ module.exports = {
         extend: {
             backgroundImage: {
                 storeone:
-                    "url('https://www.minecraft.net/content/dam/games/minecraft/key-art/MC-Vanilla_Block-Column-Image_Boat-Trip_800x800.jpg')",
+                    "url('https://cdn.vervecustoms.com/icons/jexpanel/ilya-pavlov-OqtafYT5kTw-unsplash.jpg')",
                 storetwo:
-                    "url('https://www.minecraft.net/content/dam/games/minecraft/key-art/MC-Vanilla_Block-Column-Image_Beach-Cabin_800x800.jpg')",
+                    "url('https://cdn.vervecustoms.com/icons/jexpanel/scott-rodgerson-PSpf_XgOM5w-unsplash.jpg')",
                 storethree:
-                    "url('https://www.minecraft.net/content/dam/games/minecraft/key-art/MC-Vanilla_Block-Column-Image_Mining_800x800.jpg')",
+                    "url('https://raw.githubusercontent.com/IcecreamplayzYT/verve-cdn/refs/heads/main/albert-stoynov-dyUp7WPu5q4-unsplash.jpg?token=GHSAT0AAAAAADQZ3HBQRGLV7MIYBOZRGH6A2K6SCVA')",
             },
             colors: {
                 black: '#000',
