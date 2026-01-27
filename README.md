@@ -1,4 +1,4 @@
-[![NeoDesigns Logo](https://cdn.vervecustoms.com/logo/neo.png)](https://neodesigns.hosting)
+[![NeoDesigns Logo](https://cdn.vervdsecustoms.com/logo/neo.png)](https://neodesigns.hosting)
 
 <div align="center">
 
@@ -10,8 +10,6 @@
 </div>
 
 <h1 align="center">NeoDesigns</h1>
-<h3 align="center">Enterprise-Grade Game Server Management & Billing Platform</h3>
-
 <p align="center">
 A comprehensive hosting management solution built on Jexactyl, delivering advanced server administration capabilities with integrated billing infrastructure. Designed for hosting providers who demand performance, reliability, and scalability.
 </p>
@@ -47,18 +45,3 @@ NeoDesigns is a production-ready game server management panel that unifies serve
 - RESTful API for third-party integrations
 - Customizable email notification templates
 - Multi-language interface support
-
-## Installation
-
-### System Requirements
-
-**Minimum Server Specifications**
-- **Operating System**: Ubuntu 20.04/22.04 LTS, Debian 11/12, CentOS 8+, or Rocky Linux 8+
-- **Web Server**: Nginx (recommended) or Apache 2.4+
-- **PHP**: Version 8.1 or higher with required extensions
-- **Database**: MySQL 5.7.22+ or MariaDB 10.2+
-- **Cache**: Redis 6.0+ for session and cache management
-- **Additional**: Composer 2.0+, Node.js 16+ with npm
-
-### Quick Installation
-```bash
