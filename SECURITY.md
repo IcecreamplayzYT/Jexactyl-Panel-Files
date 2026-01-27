@@ -10,7 +10,7 @@ The following versions of Jexactyl are receiving active support and maintenance.
 | 3.6.x   | :white_check_mark: |
 | < 3.5.x | :x:                |
 
-## Reporting a Vulnerability
+## Reporting a Vulnerability in NeoDesigns
 
 Please reach out directly to any project team member on Discord when reporting a security vulnerability, or you can email `tonasamya@gmail.com`, `help@neodesigns.studio` or **@_realice** on discord.
 
