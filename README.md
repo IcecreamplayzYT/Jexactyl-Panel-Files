@@ -1,11 +1,4 @@
-[![NeoDesigns Logo](https://cdn.vervdsecustoms.com/logo/neo.png)](https://neodesigns.hosting)
-
-<div align="center">
-
-[![Discord](https://img.shields.io/discord/922284031129825280?style=for-the-badge)](https://discord.com/invite/qttGR4Z5Pk)
-![Version](https://img.shields.io/github/v/release/neodesigns/panel?style=for-the-badge)
-![Contributors](https://img.shields.io/github/contributors-anon/neodesigns/panel?style=for-the-badge)
-![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
+[![NeoDesigns Logo](https://cdn.vervdsecustoms.com/logo/neo.png)](https://neodesigns.studio)
 
 </div>
 
