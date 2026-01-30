@@ -14,7 +14,7 @@ const PageContentBlock: React.FC<PageContentBlockProps> = ({
     title,
     description,
     className,
-    logo = 'https://cdn.vervecustoms.com/banners/neo/Neo-002-Transparent-Sized.png',
+    logo = 'https://cdn.neodesigns.studio/banners/neo/Neo-002-Transparent-Sized.png',
     children,
 }) => {
     const [statusData, setStatusData] = useState({
@@ -325,14 +325,14 @@ const PageContentBlock: React.FC<PageContentBlockProps> = ({
                         <FooterSection>
                             <SectionTitle>Legal</SectionTitle>
                             <SectionLink
-                                href='https://hosting.vervecustoms.com/docs/terms'
+                                href='https://neodesigns.studio/docs/terms'
                                 target='_blank'
                                 rel='noopener noreferrer'
                             >
                                 Terms of Service
                             </SectionLink>
                             <SectionLink
-                                href='https://hosting.vervecustoms.com/docs/privacy'
+                                href='https://neodesigns.studio/docs/privacy'
                                 target='_blank'
                                 rel='noopener noreferrer'
                             >
@@ -346,7 +346,7 @@ const PageContentBlock: React.FC<PageContentBlockProps> = ({
                             <p>Copyright &copy; {new Date().getFullYear()} NeoDesigns. All Rights Reserved</p>
                         </Copyright>
                         <StatusBadgeWrapper
-                            href='https://status.vervecustoms.com'
+                            href='https://status.neodesigns.studio'
                             target='_blank'
                             rel='noopener noreferrer'
                             statusColor={statusConfig.color}

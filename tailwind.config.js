@@ -6,9 +6,9 @@ module.exports = {
         extend: {
             backgroundImage: {
                 storeone:
-                    "url('https://cdn.vervecustoms.com/icons/jexpanel/ilya-pavlov-OqtafYT5kTw-unsplash.jpg')",
+                    "url('https://cdn.neodesigns.studio/icons/jexpanel/ilya-pavlov-OqtafYT5kTw-unsplash.jpg')",
                 storetwo:
-                    "url('https://cdn.vervecustoms.com/icons/jexpanel/scott-rodgerson-PSpf_XgOM5w-unsplash.jpg')",
+                    "url('https://cdn.neodesigns.studio/icons/jexpanel/scott-rodgerson-PSpf_XgOM5w-unsplash.jpg')",
                 storethree:
                     "url('https://raw.githubusercontent.com/IcecreamplayzYT/verve-cdn/refs/heads/main/albert-stoynov-dyUp7WPu5q4-unsplash.jpg?token=GHSAT0AAAAAADQZ3HBQRGLV7MIYBOZRGH6A2K6SCVA')",
             },
